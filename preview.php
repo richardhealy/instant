@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-//include 'metadata.php';
+
+include('config.php');
 include('helpers.php');
 require_once('Git.php');
 
@@ -24,14 +24,14 @@ if(
   $less .= "@featureHeightTablet: ".$_POST['featureHeightTablet'].";".PHP_EOL;
   $less .= "@featureHeightPhone: ".$_POST['featureHeightPhone'].";".PHP_EOL;
 
-  file_put_contents(getcwd().'/tmp/themes/'.$_GET['template'].'/forked-vars.less', $less);
+  file_put_contents(getcwd().'/../../../templates/'.$_GET['template'].'/forked-vars.less', $less);
 } else if(isset($_GET['template']) && isset($_GET['push'])) {
-  // RH: If template is set and read to push to github
+  // RH: If template is set and read to push to Github
 
   // RH: generate a clean directory name
   $directoryName = makeCleanDirectoryName($_GET['template']);
 
-  $forkedGitRepoURI = 'http://github.com/basekit-templates-forked/'.$_GET['template'].'.git';
+  $forkedGitRepoURI = 'http://github.com/'.$forkedGithubUser.'/'.$_GET['template'].'.git';
   
   try {
     // RH: check if the original repo exists
@@ -40,14 +40,12 @@ if(
     }
 
     // RH: opens repo, sets forked origin url, creates develop branch, ready for changes!
-    $repo = Git::open(getcwd().'/tmp/themes/'.$directoryName);
+    $repo = Git::open(getcwd().'/../../../templates/'.$directoryName);
     // RH: commits changes to develop, and pushes it!
     $repo->add('.');
     $repo->commit('Changed the logo, feature image and swatches');
     $repo->push('origin', 'develop');
     $repo->push('origin', 'master');
-
-    rmdir(getcwd().'/tmp/themes/'.$directoryName);
 
     header("Location: success.php");
     exit;

@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-//include 'metadata.php';
+include('config.php');
 include('helpers.php');
 require_once('Git.php');
 
@@ -13,8 +12,8 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
   // RH: generate a clean directory name
   $directoryName = makeCleanDirectoryName($_POST['forkedRepoName']);
 
-  $originalGitRepoURI = 'http://github.com/'.$_POST['originalRepoName'].'.git';
-  $forkedGitRepoURI = 'http://github.com/basekit-templates-forked/'.$_POST['forkedRepoName'].'.git';
+  $originalGitRepoURI = 'http://github.com/'.$originalGithubUser.'/'.$_POST['originalRepoName'].'.git';
+  $forkedGitRepoURI = 'http://github.com/'.$forkedGithubUser.'/'.$_POST['forkedRepoName'].'.git';
   
   try {
     // RH: check if the original repo exists
@@ -31,6 +30,10 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
        throw new Exception("Directory tmp/themes/$directoryName already exists! Choose a different name.");  
     }
 
+    if (file_exists(getcwd().'/../../../templates/'.$directoryName)) {
+       throw new Exception("Directory $directoryName in the TDK templates folder already exists! Choose a different name.");
+    }
+
     // RH: try to clone the repo
     try {
       $repo = Git::create(getcwd().'/tmp/themes/'.$directoryName, $originalGitRepoURI);    
@@ -40,7 +43,7 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
 
     // RH: opens repo, sets forked origin url, creates develop branch, ready for changes!
     $repo = Git::open(getcwd().'/tmp/themes/'.$directoryName);
-    $repo->remote_seturl('origin', 'https://'.$_POST['gitHubToken'].'@github.com/basekit-templates-fork/'.$_POST['forkedRepoName'].'.git');
+    $repo->remote_seturl('origin', 'https://'.$githubToken.'@github.com/'.$forkedGithubUser.'/'.$_POST['forkedRepoName'].'.git');
     $repo->create_branch('develop --track origin/develop');
     $repo->checkout('develop');
     
@@ -50,8 +53,8 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
     }
 
     // RH: Replace the logo and feature images with the images in the images dir
-    replaceLogoFile(getcwd().'/tmp/themes/'.$directoryName.'/images/logo.png', $_POST['logoImageUrl']);
-    replaceFeatureFile(getcwd().'/tmp/themes/'.$directoryName.'/images/feature-bg.jpg', $_POST['featureImageUrl']);
+    replaceLogoFile(getcwd().'/tmp/themes/'.$directoryName.'/images/logo.png', $_FILES['logoImageUrl']['tmp_name']);
+    replaceFeatureFile(getcwd().'/tmp/themes/'.$directoryName.'/images/feature-bg.jpg', $_FILES['featureImageUrl']['tmp_name']);
 
     // RH: Process the logo and process the feature image within the twig file
     // processFiles(getcwd().'/tmp/themes/'.$directoryName, $_POST['logoImageUrl'], $_POST['featureImageUrl']);
@@ -73,6 +76,12 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
     $metaData["fontSwatch"]["font9"]["font-family"] = $_POST['paragraphFont']; // feature description
     $metaData["fontSwatch"]["font10"]["font-family"] = $_POST['headerFont']; // logo text
     file_put_contents(getcwd().'/tmp/themes/'.$directoryName.'/metadata.json', str_replace('\\\\\\', '\\', str_replace('\/', '/', json_encode($metaData, JSON_PRETTY_PRINT))));
+
+    // RH: Copy the folder to templates directory
+    recurseCopy(getcwd().'/tmp/themes/'.$directoryName, getcwd().'/../../../templates/'.$directoryName);
+  
+    // RH: Remove the tmp theme folder as we'll work from the TDK version from no on    
+    recursiveRmdir(getcwd().'/tmp/themes/'.$directoryName);
 
     header("Location: preview.php?template=".$directoryName);
     exit;
@@ -112,10 +121,6 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
             <h1>Instant BaseKit Theme Creator!</h1>
             <form role="form" action="index.php" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="gitHubToken">Github.com Token</label>
-                <input type="text" name="gitHubToken" id="gitHubToken" class="form-control" value="a4810a9b48c3ae764207a26e867e5b45040401e1">
-              </div>
-              <div class="form-group">
                 <label for="originalRepoName">Git Repo i.e basekit-templates/yelaudio</label>
                 <input type="text" name="originalRepoName" id="originalRepoName" class="form-control">
               </div>
@@ -125,11 +130,11 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
               </div>
               <div class="form-group">
                 <label for="logoImageUrl">Logo Image URL</label>
-                <input type="text" name="logoImageUrl" id="logoImageUrl" class="form-control">
+                <input type="file" name="logoImageUrl" id="logoImageUrl" class="form-control">
               </div>
               <div class="form-group">
                 <label for="featureImageUrl">Feature Image URL</label>
-                <input type="text" name="featureImageUrl" id="featureImageUrl" class="form-control">
+                <input type="file" name="featureImageUrl" id="featureImageUrl" class="form-control">
               </div>
               <div class="form-group">
                 <label for="headerFont">Choose Header Font</label>

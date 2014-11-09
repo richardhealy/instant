@@ -12,6 +12,6 @@
     </head>
     <body>
         <h1>Success!</h1>
-        <p>It's only gone and bloody worked, ain't it!</p>
+        <p>Why not <a href="/plugins/instant/">build another one</a>?</p>
     </body>
 </html>
