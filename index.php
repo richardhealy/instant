@@ -121,11 +121,11 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
             <h1>Instant BaseKit Theme Creator!</h1>
             <form role="form" action="index.php" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="originalRepoName">Git Repo i.e basekit-templates/yelaudio</label>
+                <label for="originalRepoName">Git Repo i.e yelaudio</label>
                 <input type="text" name="originalRepoName" id="originalRepoName" class="form-control">
               </div>
               <div class="form-group">
-                <label for="forkedRepoName">New Forked Name</label>
+                <label for="forkedRepoName">New Forked Name (must match empty fork repo name)</label>
                 <input type="text" name="forkedRepoName" id="forkedRepoName" class="form-control">
               </div>
               <div class="form-group">

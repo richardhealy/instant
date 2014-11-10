@@ -52,6 +52,8 @@ if(
     
   } catch (Exception $e) {
     $error = $e->getMessage();
+    echo($error);
+    exit;
   }
 }
 
@@ -118,7 +120,7 @@ if(
     </head>
     <body >
         <div class="frame-container">
-          <iframe src="http://tdk.local/index.php?template=<?php echo($_GET['template']); ?>&pageType=home" class="frame"></iframe>
+          <iframe src="<?php echo($localTDKUrl); ?>/index.php?template=<?php echo($_GET['template']); ?>&pageType=home" class="frame"></iframe>
         </div>
         <div class="panel">
           <div class="panel-content">
