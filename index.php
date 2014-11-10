@@ -122,23 +122,23 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
             <form role="form" action="index.php" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="originalRepoName">Git Repo i.e yelaudio</label>
-                <input type="text" name="originalRepoName" id="originalRepoName" class="form-control">
+                <input type="text" name="originalRepoName" id="originalRepoName" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="forkedRepoName">New Forked Name (must match empty fork repo name)</label>
-                <input type="text" name="forkedRepoName" id="forkedRepoName" class="form-control">
+                <input type="text" name="forkedRepoName" id="forkedRepoName" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="logoImageUrl">Logo Image URL</label>
-                <input type="file" name="logoImageUrl" id="logoImageUrl" class="form-control">
+                <input type="file" name="logoImageUrl" id="logoImageUrl" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="featureImageUrl">Feature Image URL</label>
-                <input type="file" name="featureImageUrl" id="featureImageUrl" class="form-control">
+                <input type="file" name="featureImageUrl" id="featureImageUrl" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="headerFont">Choose Header Font</label>
-                <select class="form-control" id="headerFont" name="headerFont">
+                <select class="form-control" id="headerFont" name="headerFont" required>
                   <option value='\"Droid Sans\", Helvetica, Arial, sans-serif'>Droid Sans</option>
                   <option value='\"Arvo\", Georgia, serif'>Arvo</option>
                   <option value='\"Corben\", Georgia, serif'>Corben</option>
@@ -203,7 +203,7 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
               </div>
               <div class="form-group">
                 <label for="paragraphFont">Choose Paragraph Font</label>
-                <select class="form-control" id="paragraphFont" name="paragraphFont">
+                <select class="form-control" id="paragraphFont" name="paragraphFont" required>
                   <option value='\"Droid Sans\", Helvetica, Arial, sans-serif'>Droid Sans</option>
                   <option value='\"Arvo\", Georgia, serif'>Arvo</option>
                   <option value='\"Corben\", Georgia, serif'>Corben</option>
@@ -272,13 +272,13 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
                   <h3>Color Swatch 1</h3>
                   <p>Add swatch HEX here</p>
                 </div>
-                <div class="col-md1 col-md2 col-md-1" style="display: block;"><div class="form-group"><label class="">Background</label><input type="text" class="form-control" name="color1" placeholder="#ffffff"></div></div>
-                <div class="col-md1 col-md2 col-md-1" style="display: block;"><div class="form-group"><label class="">Contrast</label><input type="text" class="form-control" name="color2" placeholder="#000000"></div></div>
-                <div class="col-md2 col-md1 col-md-1" style="display: block;"><div class="form-group"><label>Button</label><input type="text" class="form-control" name="color3" placeholder="#000000"></div></div>
-                <div class="col-md1 col-md-1" style="display: block;"><div class="form-group"><label>H1 - H4</label><input type="text" class="form-control" name="color4" placeholder="#000000"></div></div>
-                <div class="col-md1 col-md-1" style="display: block;"><div class="form-group"><label>Paragraph</label><input type="text" class="form-control" name="color5" placeholder="#000000"></div></div>
-                <div class="col-md-1"><div class="form-group"><label>Nav Link</label><input type="text" class="form-control" name="color6" placeholder="#000000"></div></div>
-                <div class="col-md-1"><div class="form-group"><label class="">Header</label><input type="text" class="form-control" name="color7" placeholder="#000000"></div></div>
+                <div class="col-md1 col-md2 col-md-1" style="display: block;"><div class="form-group"><label class="">Background</label><input type="text" class="form-control" name="color1" placeholder="#ffffff" required></div></div>
+                <div class="col-md1 col-md2 col-md-1" style="display: block;"><div class="form-group"><label class="">Contrast</label><input type="text" class="form-control" name="color2" placeholder="#000000" required></div></div>
+                <div class="col-md2 col-md1 col-md-1" style="display: block;"><div class="form-group"><label>Button</label><input type="text" class="form-control" name="color3" placeholder="#000000" required></div></div>
+                <div class="col-md1 col-md-1" style="display: block;"><div class="form-group"><label>H1 - H4</label><input type="text" class="form-control" name="color4" placeholder="#000000" required></div></div>
+                <div class="col-md1 col-md-1" style="display: block;"><div class="form-group"><label>Paragraph</label><input type="text" class="form-control" name="color5" placeholder="#000000" required></div></div>
+                <div class="col-md-1"><div class="form-group"><label>Nav Link</label><input type="text" class="form-control" name="color6" placeholder="#000000" required></div></div>
+                <div class="col-md-1"><div class="form-group"><label class="">Header</label><input type="text" class="form-control" name="color7" placeholder="#000000" required></div></div>
               </div>
               <hr />
               <button type="submit" class="btn btn-primary">Submit</button>

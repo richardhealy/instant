@@ -9,20 +9,22 @@ $error = '';
 
 if(
   isset($_GET['template']) && 
-  isset($_POST['headerHeight']) &&
-  isset($_POST['footerHeight']) &&
   isset($_POST['mainContainerWidth']) &&
   isset($_POST['featureHeightDesktop']) &&
   isset($_POST['featureHeightTablet']) &&
-  isset($_POST['featureHeightPhone'])
+  isset($_POST['featureHeightPhone']) &&
+  isset($_POST['slideshowHeightDesktop']) &&
+  isset($_POST['slideshowHeightTablet']) &&
+  isset($_POST['slideshowHeightMobile'])
 ) {
 
-  $less  = "@headerHeight: ".$_POST['headerHeight'].";".PHP_EOL;
-  $less .= "@footerHeight: ".$_POST['footerHeight'].";".PHP_EOL;
-  $less .= "@mainContainerWidth: ".$_POST['mainContainerWidth'].";".PHP_EOL;
+  $less = "@mainContainerWidth: ".$_POST['mainContainerWidth'].";".PHP_EOL;
   $less .= "@featureHeightDesktop: ".$_POST['featureHeightDesktop'].";".PHP_EOL;
   $less .= "@featureHeightTablet: ".$_POST['featureHeightTablet'].";".PHP_EOL;
-  $less .= "@featureHeightPhone: ".$_POST['featureHeightPhone'].";".PHP_EOL;
+  $less .= "@featureHeightMobile: ".$_POST['featureHeightMobile'].";".PHP_EOL;
+  $less .= "@slideshowHeightDesktop: ".$_POST['slideshowHeightDesktop'].";".PHP_EOL;
+  $less .= "@slideshowHeightTablet: ".$_POST['slideshowHeightTablet'].";".PHP_EOL;
+  $less .= "@slideshowHeightMobile: ".$_POST['slideshowHeightMobile'].";".PHP_EOL;  
 
   file_put_contents(getcwd().'/../../../templates/'.$_GET['template'].'/forked-vars.less', $less);
 } else if(isset($_GET['template']) && isset($_GET['push'])) {
@@ -126,28 +128,32 @@ if(
           <div class="panel-content">
             <form role="form" action="preview.php?template=<?php echo($_GET['template']); ?>" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="headerHeight">Header Height</label>
-                <input class="form-control" name="headerHeight" id="headerHeight" value="40px"/>
+                <label for="mainContainerWidth">@mainContainerWidth</label>
+                <input class="form-control" name="mainContainerWidth" id="mainContainerWidth" value="960px" required/>
               </div>
               <div class="form-group">
-                <label for="footerHeight">Footer Height</label>
-                <input class="form-control" name="footerHeight" id="footerHeight" value="100px"/>
+                <label for="featureHeightDesktop">@featureHeightDesktop</label>
+                <input class="form-control" name="featureHeightDesktop" id="featureHeightDesktop" value="350px" required/>
               </div>
               <div class="form-group">
-                <label for="mainContainerWidth">Main Container Width</label>
-                <input class="form-control" name="mainContainerWidth" id="mainContainerWidth" value="960px"/>
+                <label for="featureHeightTablet">@featureHeightTablet</label>
+                <input class="form-control" name="featureHeightTablet" id="featureHeightTablet"value="300px" required/>
               </div>
               <div class="form-group">
-                <label for="featureHeightDesktop">Feature Height Desktop</label>
-                <input class="form-control" name="featureHeightDesktop" id="featureHeightDesktop" value="350px"/>
+                <label for="featureHeightPhone">@featureHeightMobile</label>
+                <input class="form-control" name="featureHeightPhone" id="featureHeightPhone" value="250px" required/>
               </div>
               <div class="form-group">
-                <label for="featureHeightTablet">Feature Height Tablet</label>
-                <input class="form-control" name="featureHeightTablet" id="featureHeightTablet"value="300px"/>
+                <label for="slideshowHeightDesktop">@slideshowHeightDesktop</label>
+                <input class="form-control" name="slideshowHeightDesktop" id="slideshowHeightDesktop" value="350px" required/>
               </div>
               <div class="form-group">
-                <label for="featureHeightPhone">Feature Height Phone</label>
-                <input class="form-control" name="featureHeightPhone" id="featureHeightPhone" value="250px"/>
+                <label for="slideshowHeightTablet">@slideshowHeightTablet</label>
+                <input class="form-control" name="slideshowHeightTablet" id="slideshowHeightTablet"value="300px" required/>
+              </div>
+              <div class="form-group">
+                <label for="slideshowHeightPhone">@slideshowHeightMobile</label>
+                <input class="form-control" name="slideshowHeightPhone" id="slideshowHeightPhone" value="250px" required/>
               </div>
               <hr />
               <button type="submit" class="btn btn-primary">Submit</button>
