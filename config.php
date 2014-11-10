@@ -1,9 +1,9 @@
 <?php
 
 // This is the URL that will be required to preview the template
-$localTDKUrl = 'http://localhost';
+$localTDKUrl = 'http://localhost/';
 // This is a token that will need to be set up in you github account.
-$githubToken = 'ENTERTOKEN';
+$githubToken = 'ENTERTOKENHERE';
 // This is the original basekit theme account on github. default: basekit-templates
 $originalGithubUser = 'basekit-templates';
 // This is the original basekit theme account on github. default: basekit-templates-fork
