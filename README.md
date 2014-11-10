@@ -1,6 +1,6 @@
 #BaseKit Instant Theme Creator Plugin
 
-Used in conjuction with the Theme Development Kit.
+Used in conjunction with the Theme Development Kit.
 
 ## Usage
 
@@ -10,7 +10,7 @@ The BaseKit Instant Theme Creator TDK Plugin will automatically create BaseKit r
 
 1. Go to http://github.com/basekit-templates and find a theme you link. Copy the github repository name i.e. `specify` and enter it into the `Git Repo` field.
 2. Create a repository your github account. For example, we would create a repository at http://github.com/basekit-templates-fork/ called `testing`. (Replace `basekit-templates-fork` with your github username). IMPORTANT: This repository will need to be empty. Add `testing` to the `New Forked Name` field:
-3. Select images for logo and cover image. It is recommended they are the same dimension's as the original images. Any other will look odd in the orginial template.
+3. Select images for logo and cover image. It is recommended they are the same dimension's as the original images. Any other will look odd in the original template.
 4. Select the Font face you want for the heading and paragraph text within the site.
 5. Add new color swatch values.
 6. Press Submit!
