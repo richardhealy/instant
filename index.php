@@ -284,9 +284,47 @@ if(isset($_POST['originalRepoName']) && isset($_POST['forkedRepoName']) ) {
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
-<h2>How To: Instant Theme Creator</h2>
+<h1>BaseKit Instant Theme Creator Plugin</h1>
 
-<p>This utility has been built to instantly create BaseKit themes</p>
+<p>Used in conjuction with the Theme Development Kit.</p>
+
+<h2>Usage</h2>
+
+<p>The BaseKit Instant Theme Creator TDK Plugin will automatically create BaseKit ready themes for you based off an existing theme.</p>
+
+<h3>Step-by-step Guide</h3>
+
+<ol>
+<li>Go to http://github.com/basekit-templates and find a theme you link. Copy the github repository name i.e. <code>specify</code> and enter it into the <code>Git Repo</code> field.</li>
+<li>Create a repository your github account. For example, we would create a repository at http://github.com/basekit-templates-fork/ called <code>testing</code>. (Replace <code>basekit-templates-fork</code> with your github username). IMPORTANT: This repository will need to be empty. Add <code>testing</code> to the <code>New Forked Name</code> field:</li>
+<li>Select images for logo and cover image. It is recommended they are the same dimension's as the original images. Any other will look odd in the orginial template.</li>
+<li>Select the Font face you want for the heading and paragraph text within the site.</li>
+<li>Add new color swatch values.</li>
+<li>Press Submit!</li>
+</ol>
+
+
+<p>You will be redirected to your a new page where you can see the new generated template. It will also appear in your TDK as a new template.</p>
+
+<p>To manually edit the template, go to the templates/ directory in your TDK and edit the files there.</p>
+
+<p>We add various variables to your new template i.e @featureHeightDesktop. Use the ITC previewer to update these to change the value of these variables to make your theme look different.</p>
+
+<p>When you are happy, press <code>Push to Github</code> to send the files up to your Github account.</p>
+
+<h2>Installation</h2>
+
+<ol>
+<li>Download the zip from here: https://github.com/richardhealy/instant (master branch)</li>
+<li>Extract the contents of the zip into the  TDK public/plugins/ directory</li>
+<li>If you have a different TDK url.... i.e. http://localhost:8888 or tdk.local, paste that into line localTDKUrl variable on line 4 in config.php</li>
+<li>Generate a github token. Look in the settings panel in Github for this</li>
+<li>Paste the token into config.php (line 6)</li>
+<li>Add the username where the forked template will be pushed too. You will need to own this account to able to use this feature.</li>
+<li>make sure you update the <code>tmp/themes</code> directory in the instant folder and the <code>templates</code> folder in the TDK to be writable via PHP i.e. cd into the TDK dir and run: <code>chmod +w public/plugins/instant/tmp/themes</code> and <code>chmod +w templates/</code></li>
+<li>Go to  http://YourTdkUrl/plugins/instant/ in your browser</li>
+<li>Build custom themes!</li>
+</ol>
 
 <h3>The BaseKit Team</h3>
         </div>
